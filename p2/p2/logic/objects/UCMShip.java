@@ -70,5 +70,24 @@ public class UCMShip extends Ship {
 		 }
 		 return ret;
 	}
+
+
+	public boolean getCanShootLaser() {
+		return canShootLaser;
+	}
+
+
+	public void setCanShootLaser(boolean canShootLaser) {
+		this.canShootLaser = canShootLaser;
+	}
+
+	public boolean getHasShockWave() {
+		return hasShockWave;
+	}
+
+
+	public void setHasShockWave(boolean hasShockWave) {
+		this.hasShockWave = hasShockWave;
+	}
 	
 }

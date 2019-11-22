@@ -1,6 +1,7 @@
 package tp.p2.p2.logic.objects;
 
 import tp.p2.p2.logic.Game;
+import tp.p2.p2.logic.Level;
 
 public abstract class AlienShip extends EnemyShip {
 	
@@ -17,22 +18,35 @@ public abstract class AlienShip extends EnemyShip {
 	}
 
 	@Override
-	public void move() {
+	public void move() { // if(variable instanceof clase))
 		// TODO Auto-generated method stub
 		if(cyclesToMove == 0) {
 //			Actualizar cyclesToMove
+			Level level = this.game.getLevel();
+			this.cyclesToMove = level.getNumCyclesToMoveOneCell();
 //			Hacer el movimiento a la izquierda o a la derecha
+			if(this.move == Move.LEFT) {
+				this.y -= 1;
+			}
+			else if(this.move == Move.RIGHT) {
+				this.y += 1;
+			}
 //			Actualizar IS_IN_FINAL_ROW
+			if(this.x == 8)
+				IS_IN_FINAL_ROW = true;
+			
+			if(this.y == 7 || this.y == 0) {
+				SHIPS_ON_BORDER = REMAINING_ALIENS;
+			}
 		}
 		
-		if(IS_IN_FINAL_ROW) { // ¿O else if?
-			SHIPS_ON_BORDER = REMAINING_ALIENS;
-		}
-		
-		if (SHIPS_ON_BORDER > 0 && !IS_IN_FINAL_ROW) {
+		else if (SHIPS_ON_BORDER > 0 && !IS_IN_FINAL_ROW) {
 //			Aumentar la fila
+			this.x += 1;
 //			Cambiar el sentido del movimiento
-//			SHIPS_ON_BORDER -= 1;
+			this.move.flip();
+			
+			SHIPS_ON_BORDER -= 1;
 		}
 		
 		else {
@@ -42,7 +56,7 @@ public abstract class AlienShip extends EnemyShip {
 
 	public static boolean haveLanded() {
 		// TODO Auto-generated method stub
-		return false;
+		return IS_IN_FINAL_ROW; //¿?
 	}
 
 	public static boolean allDead() {

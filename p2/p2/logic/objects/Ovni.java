@@ -6,9 +6,13 @@ public class Ovni extends EnemyShip{
 	
 	private static final int POINTS = 25;
 	private static final int LIFE = 1;
+	private static final int INIT_X = 0;
+	private static final int INIT_Y = 8;
+	private boolean enable;
 	
 	public Ovni(Game game) { // 0 y 8 parámetro
-		super(game, 0, 8, LIFE, POINTS);
+		super(game, INIT_X, INIT_Y, LIFE, POINTS);
+		this.setEnable(false);
 	}
 
 	public void setX(int x) {
@@ -26,12 +30,21 @@ public class Ovni extends EnemyShip{
 	@Override
 	public void computerAction() {
 		// TODO Auto-generated method stub
+		if(IExecuteRandomActions.canGenerateRandomOvni(game)) {
+			this.setEnable(true);
+			this.x = INIT_X;
+			this.y = INIT_Y;
+		}
+		
 		
 	}
 
 	@Override
 	public void onDelete() {
 		// TODO Auto-generated method stub
+		super.onDelete();
+		this.game.enableShockWave();
+		this.setEnable(false);
 		
 	}
 
@@ -39,6 +52,14 @@ public class Ovni extends EnemyShip{
 	public void move() {
 		// TODO Auto-generated method stub
 		
+	}
+
+	public boolean isEnable() {
+		return enable;
+	}
+
+	public void setEnable(boolean enable) {
+		this.enable = enable;
 	}
 	
 }

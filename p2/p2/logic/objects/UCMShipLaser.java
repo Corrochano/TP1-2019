@@ -5,11 +5,11 @@ import tp.p2.p2.logic.Game;
 public class UCMShipLaser extends Weapon {
 	private int x;
 	private int y;
-	private UCMShip ucmShip;
+	//private UCMShip ucmShip;
 	
 	public UCMShipLaser(Game game, int x, int y) {
 		super(game, x, y, 0);
-		setUcmShip(null); // ¿?
+	//	setUcmShip(null); // ¿?
 	}
 
 	public int getX() {
@@ -33,7 +33,7 @@ public class UCMShipLaser extends Weapon {
 	}
 
 	@Override
-	public void computerAction() {
+	public void computerAction() { // ¿?
 		// TODO Auto-generated method stub
 		
 	}
@@ -41,15 +41,15 @@ public class UCMShipLaser extends Weapon {
 	@Override
 	public void onDelete() {
 		// TODO Auto-generated method stub
-		
+		this.game.enableMissile();
 	}
 
-	public UCMShip getUcmShip() {
-		return ucmShip;
-	}
-
-	public void setUcmShip(UCMShip ucmShip) {
-		this.ucmShip = ucmShip;
-	}
+//	public UCMShip getUcmShip() {
+//		return ucmShip;
+//	}
+//
+//	public void setUcmShip(UCMShip ucmShip) {
+//		this.ucmShip = ucmShip;
+//	}
 
 }

@@ -4,11 +4,7 @@ import java.util.Random;
 
 import tp.p2.p2.logic.GamePrinter;
 import tp.p2.p2.logic.Level;
-import tp.p2.p2.logic.Move;
-import tp.p2.p2.logic.lists.BombList;
-import tp.p2.p2.logic.lists.DestroyerShipList;
 import tp.p2.p2.logic.lists.GameObjectBoard;
-import tp.p2.p2.logic.lists.RegularShipList;
 import tp.p2.p2.logic.objects.AlienShip;
 import tp.p2.p2.logic.objects.GameObject;
 import tp.p2.p2.logic.objects.IPlayerController;
@@ -38,7 +34,7 @@ public class Game implements IPlayerController{
 	
 	public void initGame () {
 		currentCycle = 0;
-		board = initializer . initialize (this, level );
+		board = initializer.initialize(this, level);
 		player = new UCMShip(this, DIM_X / 2, DIM_Y - 1);
 		board.add(player);
 	}
@@ -143,12 +139,14 @@ public class Game implements IPlayerController{
 //			return ucmShip.toString();
 //		return " ";
 	}
-
+	
 	
 	// toString()
 	@Override
 	public String toString() {
-		
+		GamePrinter gamePrinter = new GamePrinter(this, DIM_X ,DIM_Y);
+		System.out.print(this.infoToString());
+		System.out.println(gamePrinter.toString());
 		return null;
 	}
 	
@@ -159,6 +157,7 @@ public class Game implements IPlayerController{
 	@Override
 	public boolean move(int numCells) {
 		// TODO Auto-generated method stub
+		
 		return false;
 	}
 
@@ -183,13 +182,14 @@ public class Game implements IPlayerController{
 	@Override
 	public void enableShockWave() {
 		// TODO Auto-generated method stub
+		this.player.setHasShockWave(true);
 		
 	}
 
 	@Override
 	public void enableMissile() {
 		// TODO Auto-generated method stub
-		
+		this.player.setCanShootLaser(true);
 	}
 	
 }
