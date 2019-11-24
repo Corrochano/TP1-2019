@@ -9,9 +9,9 @@ public abstract class GameObject implements IAttack {
 	protected int live;
 	protected Game game;
 	public GameObject( Game game, int x, int y, int live) {
-		this. x = x;
-		this. y = y;
-		this. game = game;
+		this.x = x;
+		this.y = y;
+		this.game = game;
 		this.live = live;
 	}
 	public int getX() {

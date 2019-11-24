@@ -17,7 +17,17 @@ public abstract class EnemyShip extends Ship{
 		this.game.receivePoints(this.points);
 	}
 	
-	
+	@Override
+	public boolean receiveMissileAttack(int damage) {
+		this.getDamage(damage);
+		if(this instanceof Ovni && this.live <= 0) {
+			this.game.enableShockWave();
+		}
+		if(this.live <= 0) {
+			this.onDelete();
+		}
+		return true;
+	} 
 	
 	
 }

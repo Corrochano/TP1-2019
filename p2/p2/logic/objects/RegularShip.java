@@ -20,4 +20,5 @@ public class RegularShip extends AlienShip{
 		// TODO Auto-generated method stub
 		
 	}
+	
 }

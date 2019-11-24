@@ -7,9 +7,10 @@ public class Bomb extends Weapon {
 	private boolean enable;
 	
 	public Bomb(Game game, int x, int y, DestroyerShip destroy) { // Esto no tiene vida
-		super(game, x, y, 0);
+		super(game, x, y, 1);
 		setDestroyer(destroy);
 		setEnable(false);
+		this.move = Move.DOWN;
 	}
 
 	public int getX() {
@@ -42,16 +43,18 @@ public class Bomb extends Weapon {
 	public void computerAction() {
 		// TODO Auto-generated method stub
 		//this.destroyer.computerAction();
-		if(!this.isEnable()) {
+		if(this.isEnable()) { // Echar un ojo
 			this.x = this.destroyer.getX() + 1;
 			this.y = this.destroyer.getY();
-			this.setEnable(true);
+			this.setEnable(false);
 		}
 	}
 
 	@Override
 	public void onDelete() {
 		// TODO Auto-generated method stub
+		this.x = -1;
+		this.y = -1;
 		this.destroyer.setCanShootBomb(true);
 		this.setEnable(true);
 	}
@@ -64,11 +67,29 @@ public class Bomb extends Weapon {
 		this.destroyer = destroyer;
 	}
 
-	boolean isEnable() {
+	protected boolean isEnable() {
 		return enable;
 	}
 
 	public void setEnable(boolean enable) {
 		this.enable = enable;
 	}
+	
+	@Override
+	public boolean receiveMissileAttack(int damage) {
+		this.onDelete();
+		return true;
+	} 
+	
+	@Override
+	public boolean performAttack(GameObject other) {	
+		if(super.performAttack(other) && ((other instanceof UCMShipLaser) || (other instanceof UCMShip))) {
+			this.onDelete();
+			return other.receiveBombAttack(1);
+		}
+		else {
+			return false;
+		}
+	}
+	
 }

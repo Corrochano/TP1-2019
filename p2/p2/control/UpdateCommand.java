@@ -15,9 +15,7 @@ public class UpdateCommand extends Command{
 
 	@Override
 	public boolean execute(Game game) {
-		game.computerAction();
 		game.update();
-		game.addCycle();
 		return true;
 	}
 

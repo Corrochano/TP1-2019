@@ -15,8 +15,8 @@ import tp.p2.p2.logic.objects.UCMShipLaser;
 import java.util.Random;
 
 public class Game implements IPlayerController{
-	public final static int DIM_X = 9;
-	public final static int DIM_Y = 8;
+	public final static int DIM_X = 8;
+	public final static int DIM_Y = 9;
 	private int currentCycle;
 	private Random rand;
 	private Level level;
@@ -24,6 +24,7 @@ public class Game implements IPlayerController{
 	private UCMShip player;
 	private boolean doExit;
 	private BoardInitializer initializer ;
+	private int points;
 	
 	public Game (Level level, Random random){
 		this. rand = random;
@@ -34,8 +35,9 @@ public class Game implements IPlayerController{
 	
 	public void initGame () {
 		currentCycle = 0;
+		this.points = 0;
 		board = initializer.initialize(this, level);
-		player = new UCMShip(this, DIM_X / 2, DIM_Y - 1);
+		player = new UCMShip(this, DIM_X - 1, DIM_Y / 2);
 		board.add(player);
 	}
 	
@@ -98,73 +100,59 @@ public class Game implements IPlayerController{
 		else return "This should not happen";
 	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	public String toStringObjectAt(int i, int j) {
-		return null; //Poner cada uno en su lista
-//		for(int k = 0; k < this.bombList.getBombCount(); k++) {
-//			if(this.bombList.getPosXBomb(k) == i && this.bombList.getPosYBomb(k) == j)
-//				return bombList.toStringBomb(k);
-//		}
-//		
-//		for(int k = 0; k < this.destroyerList.getDestroyerCount(); k++) {
-//			if(this.destroyerList.getPosXDestroyer(k) == i && this.destroyerList.getPosYDestroyer(k) == j)
-//				return destroyerList.toStringDestroyer(k);
-//		}
-//		
-//		for(int k = 0; k < this.regularList.getRegularCount(); k++) {
-//			if(this.regularList.getPosXRegular(k) == i && this.regularList.getPosYRegular(k) == j)
-//				return regularList.toStringRegular(k);
-//		}
-//		
-//		if(getLaser() != null)
-//			if(this.laser.getX() == i && this.laser.getY() == j)
-//				return laser.toString();
-//		
-//		if(getOvni() != null)
-//			if(this.ovni.getX() == i && this.ovni.getY() == j)
-//				return this.ovni.toString();
-//		
-//		if(this.ucmShip.getX() == i && this.ucmShip.getY() == j)
-//			return ucmShip.toString();
-//		return " ";
+		return positionToString(i, j);
 	}
 	
 	
 	// toString()
 	@Override
 	public String toString() {
+		String ret;
 		GamePrinter gamePrinter = new GamePrinter(this, DIM_X ,DIM_Y);
-		System.out.print(this.infoToString());
-		System.out.println(gamePrinter.toString());
-		return null;
+		ret = infoToString();
+		ret += gamePrinter.toString();
+		return ret;
 	}
 	
-	
+	public int getPoints() {
+		return this.points;
+	}
 	
 	// TODO implementar los métodos del interfaz IPlayerController
 	
 	@Override
 	public boolean move(int numCells) {
 		// TODO Auto-generated method stub
-		
-		return false;
+		if(this.isOnBoard(this.player.getX(), this.player.getY() + numCells)) {
+			this.player.setY(this.player.getY() + numCells);
+			return true;
+		}
+		else {
+			//System.out.println("You can´t move so far away.");
+			return false;
+		}
+	}
+	
+	public void list() {
+		System.out.println("Command > list\r\n" + 
+				"[R]egular ship: Points: 5 - Harm: 0 - Shield: 2\r\n" + 
+				"[D]estroyer ship: Points: 10 - Harm: 1 - Shield: 1\r\n" + 
+				"[O]vni: Points: 25 - Harm: 0 - Shield: 1\r\n" + 
+				"^__^: Harm: 1 - Shield: 3");
 	}
 
 	@Override
 	public boolean shootLaser() {
 		// TODO Auto-generated method stub
-		return false;
+		if(this.getMissileEnable()) {
+			this.board.add(new UCMShipLaser(this, this.player.getX(), this.player.getY()));
+			this.disableMissile();
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 
 	@Override
@@ -176,7 +164,7 @@ public class Game implements IPlayerController{
 	@Override
 	public void receivePoints(int points) {
 		// TODO Auto-generated method stub
-		this.player.setPoints(this.player.getPoints() + points);
+		this.points += points;
 	}
 
 	@Override
@@ -190,6 +178,14 @@ public class Game implements IPlayerController{
 	public void enableMissile() {
 		// TODO Auto-generated method stub
 		this.player.setCanShootLaser(true);
+	}
+	
+	public boolean getMissileEnable() {
+		return this.player.getCanShootLaser();
+	}
+	
+	public void disableMissile() {
+		this.player.setCanShootLaser(false);
 	}
 	
 }

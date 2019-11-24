@@ -15,10 +15,8 @@ public class ShockwaveCommand extends Command {
 	@SuppressWarnings("resource")
 	@Override
 	public boolean execute(Game game) {
-		if(game.shockwave()) {
-			game.computerAction();
+		if(game.shockWave()) {
 			game.update();
-			game.addCycle();
 			return true;
 		}
 		else {

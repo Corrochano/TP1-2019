@@ -3,23 +3,24 @@ package tp.p2.p2.logic.objects;
 import tp.p2.p2.logic.Game;
 
 public class UCMShip extends Ship {
-	private int points;
+	//private int points;
 	private boolean hasShockWave;
 	private boolean canShootLaser;
 	
 	public UCMShip(Game game, int x, int y) {
 		super(game, x, y, 3);
-		setPoints(0);
+		this.setCanShootLaser(true);
+		//setPoints(0);
 	}
 
 	
-	public void setPoints(int in) {
-		this.points = in;
-	}
+//	public void setPoints(int in) {
+//		this.points = in;
+//	}
 	
-	public int getPoints() {
-		return this.points;
-	}
+//	public int getPoints() {
+//		return this.points;
+//	}
 	
 	public void setX(int x) {
 		this.x = x;
@@ -60,7 +61,7 @@ public class UCMShip extends Ship {
 		// TODO Auto-generated method stub
 		String ret;
 		 ret = "Life: " + this.live + "\n" 
-				+ "Points: " + this.points + "\n"
+				+ "Points: " + this.game.getPoints() + "\n"
 				+ "Shock Wave: ";
 		 if(hasShockWave) {
 			 ret += "YES\n";
@@ -88,6 +89,12 @@ public class UCMShip extends Ship {
 
 	public void setHasShockWave(boolean hasShockWave) {
 		this.hasShockWave = hasShockWave;
+	}
+	
+	@Override
+	public boolean receiveBombAttack(int damage) {
+		this.getDamage(damage);
+		return true;
 	}
 	
 }

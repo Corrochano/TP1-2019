@@ -3,12 +3,11 @@ package tp.p2.p2.logic.objects;
 import tp.p2.p2.logic.Game;
 
 public class UCMShipLaser extends Weapon {
-	private int x;
-	private int y;
 	//private UCMShip ucmShip;
 	
 	public UCMShipLaser(Game game, int x, int y) {
-		super(game, x, y, 0);
+		super(game, x, y, 1);
+		this.move = Move.UP;
 	//	setUcmShip(null); // ¿?
 	}
 
@@ -41,6 +40,9 @@ public class UCMShipLaser extends Weapon {
 	@Override
 	public void onDelete() {
 		// TODO Auto-generated method stub
+		this.x = -1;
+		this.y = -1;
+		this.live = 0;
 		this.game.enableMissile();
 	}
 
@@ -51,5 +53,26 @@ public class UCMShipLaser extends Weapon {
 //	public void setUcmShip(UCMShip ucmShip) {
 //		this.ucmShip = ucmShip;
 //	}
-
+	
+	@Override
+	public boolean receiveBombAttack(int damage) {
+		this.onDelete();
+		return true;
+	}
+	
+	@Override
+	public boolean performAttack(GameObject other) {
+		if(super.performAttack(other) && ((other instanceof EnemyShip) || (other instanceof Bomb))){
+			this.onDelete();
+			return other.receiveMissileAttack(1);
+		}
+		else {
+			return false;
+		}
+	}
+	
+	@Override
+	protected boolean isEnable() {
+		return this.game.getMissileEnable();
+	}
 }

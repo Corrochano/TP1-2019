@@ -15,10 +15,8 @@ public class ShootCommand extends Command {
 	@SuppressWarnings("resource")
 	@Override
 	public boolean execute(Game game) {
-		if(game.shoot()) {
-			game.computerAction();
+		if(game.shootLaser()) {
 			game.update();
-			game.addCycle();
 			return true;
 		}
 		else {

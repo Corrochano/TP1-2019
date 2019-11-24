@@ -32,10 +32,10 @@ public abstract class AlienShip extends EnemyShip {
 				this.y += 1;
 			}
 //			Actualizar IS_IN_FINAL_ROW
-			if(this.x == 8)
+			if(this.x == 7)
 				IS_IN_FINAL_ROW = true;
 			
-			if(this.y == 7 || this.y == 0) {
+			if(this.y == 8 || this.y == 0) {
 				SHIPS_ON_BORDER = REMAINING_ALIENS;
 			}
 		}
@@ -44,7 +44,7 @@ public abstract class AlienShip extends EnemyShip {
 //			Aumentar la fila
 			this.x += 1;
 //			Cambiar el sentido del movimiento
-			this.move.flip();
+			this.move = this.move.flip();
 			
 			SHIPS_ON_BORDER -= 1;
 		}
@@ -69,4 +69,13 @@ public abstract class AlienShip extends EnemyShip {
 		return Integer.toString(REMAINING_ALIENS); // String.valueOf(REMAINING_ALIENS);
 	}
 
+	public void onDelete() {
+		super.onDelete();
+		REMAINING_ALIENS -= 1;
+	}
+	
+	public void resetRemainingAliens() {
+		REMAINING_ALIENS = 0;
+	}
+	
 }

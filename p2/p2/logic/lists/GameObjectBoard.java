@@ -1,5 +1,8 @@
 package tp.p2.p2.logic.lists;
+import tp.p2.p2.logic.objects.Bomb;
 import tp.p2.p2.logic.objects.GameObject;
+import tp.p2.p2.logic.objects.Shockwave;
+import tp.p2.p2.logic.objects.UCMShipLaser;
 
 public class GameObjectBoard {
 	private GameObject[] objects;
@@ -10,8 +13,8 @@ public class GameObjectBoard {
 	public GameObjectBoard (int width, int height) {
 		// TODO implement
 		objects = new GameObject[width*height];
-		this.width = width;
-		this.height = height;
+//		this.width = width;
+//		this.height = height;
 		this.currentObjects = 0;
 		
 	}
@@ -21,14 +24,12 @@ public class GameObjectBoard {
 	}
 	
 	public void add (GameObject object) {
-		// TODO implement
-		this.objects[currentObjects] = object;
+		this.objects[getCurrentObjects()] = object;
 		this.currentObjects++;
 	}
 	
 	private GameObject getObjectInPosition(int x, int y) {
-		// TODO implement
-		for(int i = 0; i < this.currentObjects; i++) {
+		for(int i = 0; i < getCurrentObjects(); i++) {
 			if(this.objects[i].getX() == x && this.objects[i].getY() == y) {
 				return objects[i];
 			}
@@ -37,7 +38,7 @@ public class GameObjectBoard {
 	}
 	
 	private int getIndex(int x, int y) {
-		for(int i = 0; i < this.currentObjects; i++) {
+		for(int i = 0; i < getCurrentObjects(); i++) {
 			if(this.objects[i].getX() == x && this.objects[i].getY() == y) {
 				return i;
 			}
@@ -49,11 +50,11 @@ public class GameObjectBoard {
 		int aux = this.getIndex(object.getX(), object.getY());
 		// Reordenar
 		if(aux != - 1) {
-			for(int i =  aux; i < currentObjects - 1; i++) {
-				objects[aux] = objects[aux + 1];
+			for(int i =  aux; i < getCurrentObjects() - 1; i++) {
+				objects[i] = objects[i + 1];
 			}
 			
-			objects[currentObjects - 1] = null;
+			objects[getCurrentObjects() - 1] = null;
 			
 			this.currentObjects -= 1;
 		}
@@ -61,14 +62,25 @@ public class GameObjectBoard {
 	
 	public void update() {
 		// TODO implement
+		for(int i = 0; i < getCurrentObjects(); i++) {
+			objects[i].move();
+			checkAttacks(this.objects[i]);
+		}
+		this.removeDead();
 	}
 	
 	private void checkAttacks(GameObject object) { // Lo llama update
-		// TODO implement
+//		GameObject aux = getObjectInPosition(object.getX(), object.getY());
+//		aux.performAttack(object);
+		for (int i = 0; i < this.currentObjects; i ++) {
+			GameObject other = objects[i];
+			if (object != other)
+				object.performAttack(other);
+		}
 	}
 	
 	public void computerAction() {
-		for(int i = 0; i < this.currentObjects; i++)
+		for(int i = 0; i < getCurrentObjects(); i++)
 			this.objects[i].computerAction();
 	}
 	
@@ -81,13 +93,12 @@ public class GameObjectBoard {
 	}
 	
 	public String toString(int x, int y) {
-		int aux = getIndex(x, y);
-		if(aux >= 0) {
-			return objects[aux].toString();
+		GameObject aux = getObjectInPosition(x, y);
+		if(aux == null) {
+			return "";
 		}
 		else {
-			System.out.println("Esto no debería pasar");
-			return null;
+			return aux.toString();
 		}
 	}
 }

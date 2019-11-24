@@ -16,10 +16,17 @@ public class MoveCommand extends Command{
 	@SuppressWarnings("resource")
 	@Override
 	public boolean execute(Game game) {
-		if(game.move(this.myCommandWords)) {
-			game.computerAction();
+		int aux = 0;
+		if(this.myCommandWords[1].equals("left") || this.myCommandWords[1].equals("l")) {
+			aux = -1 * Integer.parseInt(this.myCommandWords[2]);
+		}
+		
+		if(this.myCommandWords[1].equals("right") || this.myCommandWords[1].equals("r")) {
+			aux = Integer.parseInt(this.myCommandWords[2]);
+		}
+
+		if(game.move(aux)) {
 			game.update();
-			game.addCycle();
 			return true;
 		}
 		else {

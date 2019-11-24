@@ -4,9 +4,11 @@ import tp.p2.p2.logic.Game;
 
 public class Shockwave extends Weapon {
 
-	public Shockwave(Game game, int x, int y, int live) {
-		super(game, x, y, live);
-		// TODO Auto-generated constructor stub
+	private boolean enable;
+	
+	public Shockwave(Game game, int x, int y) {
+		super(game, x, y, 1);
+		this.setEnable(true);
 	}
 
 	@Override
@@ -29,13 +31,26 @@ public class Shockwave extends Weapon {
 
 	@Override
 	public String toString() {
-		// TODO Auto-generated method stub
-		return null;
+		return "";
 	}
 
 	@Override
 	public void performAttack() {
 		
+	}
+
+	/**
+	 * @return the enable
+	 */
+	public boolean isEnable() {
+		return enable;
+	}
+
+	/**
+	 * @param enable the enable to set
+	 */
+	public void setEnable(boolean enable) {
+		this.enable = enable;
 	}
 	
 }
