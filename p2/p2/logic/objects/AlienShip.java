@@ -7,7 +7,7 @@ public abstract class AlienShip extends EnemyShip {
 	
 	protected static int REMAINING_ALIENS = 0;
 	private static boolean IS_IN_FINAL_ROW;
-	private static int SHIPS_ON_BORDER;
+	protected static int SHIPS_ON_BORDER;
 	protected int cyclesToMove;
 
 	public AlienShip(Game game, int x, int y, int live, int pointsIn) {
@@ -81,9 +81,9 @@ public abstract class AlienShip extends EnemyShip {
 	@Override
 	public boolean receiveShockWaveAttack(int damage) {
 		this.getDamage(damage);
-		if(this.live <= 0) {
-			this.onDelete();
-		}
+//		if(this.live <= 0) {
+//			this.onDelete();
+//		}
 		return true;
 	}
 	

@@ -38,7 +38,7 @@ public class Game implements IPlayerController{
 		this.points = 0;
 		board = initializer.initialize(this, level);
 		player = new UCMShip(this, DIM_X - 1, DIM_Y / 2);
-		laser = new UCMShipLaser(this, -1, -1);
+		laser = new UCMShipLaser(this, -7, -7);
 		shockwave = new Shockwave(this);
 		board.add(player);
 		board.add(laser);
@@ -183,5 +183,22 @@ public class Game implements IPlayerController{
 		this.shockwave.setEnable(enable);
 	}
 	
+	public void removeObject(GameObject object) {
+		this.board.remove(object);
+	}
+	
+	public void reorderLaser() {
+		this.board.reorderLaser(this.laser);
+	}
+	
+	public void doExplosion(int x, int y) {
+		for(int i = (x - 1); i < (x + 2); i++) {
+			for(int j = (y - 1); j < (y + 2); j++) {
+				if(x != i || y !=j) {
+					this.board.doDamage(i, j);
+				}
+			}
+		}
+	}
 	
 }

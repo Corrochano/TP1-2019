@@ -42,10 +42,15 @@ public class Bomb extends Weapon {
 	@Override
 	public void computerAction() {
 		// TODO Auto-generated method stub
-		if(this.isEnable() && IExecuteRandomActions.canGenerateRandomBomb(game)) { // Echar un ojo
-			this.x = this.destroyer.getX() + 1;
-			this.y = this.destroyer.getY();
-			this.setEnable(false);
+		if(this.destroyer.getLive() > 0) {
+			if(this.isEnable() && IExecuteRandomActions.canGenerateRandomBomb(game)) { // Echar un ojo
+				this.x = this.destroyer.getX() + 1;
+				this.y = this.destroyer.getY();
+				this.setEnable(false);
+			}
+		}
+		else {
+			this.game.removeObject(this);
 		}
 	}
 

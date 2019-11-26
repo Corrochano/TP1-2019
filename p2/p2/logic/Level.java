@@ -1,15 +1,16 @@
 package tp.p2.p2.logic;
 
 public enum Level {
-	EASY(4, 2, 0.2, 3, 0.5, 1),
-	HARD(8, 4, 0.3, 2, 0.2, 2),
-	INSANE(12, 4, 0.5, 1, 0.1, 3);
+	EASY(4, 2, 0.2, 3, 0.5, 1, 0.5),
+	HARD(8, 4, 0.3, 2, 0.2, 2, 0.5),
+	INSANE(12, 4, 0.5, 1, 0.1, 3, 0.5);
 	private int numRegularAliens;
 	private int numDestroyerAliens;
 	private int numCyclesToMoveOneCell;
 	private double ovniFrequency;
 	private double shootFrequency;
 	private int numRowsOfRegularAliens;
+	private double explosiveFrequency;
 	
 	private Level(
 			int numRegularAliens,
@@ -18,7 +19,9 @@ public enum Level {
 		int numCyclesToMoveOneCell,
 		double ovniFrequency,
 	
-		int numRowsOfRegularAliens)
+		int numRowsOfRegularAliens,
+		
+		double explosiveFrequency)
 	{
 			this.numRegularAliens = numRegularAliens;
 			this.numDestroyerAliens = numDestroyerAliens;
@@ -26,6 +29,7 @@ public enum Level {
 			this.numCyclesToMoveOneCell = numCyclesToMoveOneCell;
 			this.ovniFrequency = ovniFrequency;
 			this.numRowsOfRegularAliens = numRowsOfRegularAliens;
+			this.explosiveFrequency = explosiveFrequency;
 	}
 	
 	public int getNumRegularAliens() {
@@ -38,6 +42,10 @@ public enum Level {
 	
 	public Double getShootFrequency() {
 		return shootFrequency;
+	}
+	
+	public Double getExplosiveFrequency() {
+		return explosiveFrequency;
 	}
 	
 	public int getNumCyclesToMoveOneCell() {

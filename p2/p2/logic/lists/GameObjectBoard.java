@@ -46,7 +46,7 @@ public class GameObjectBoard {
 		return -1; //Error, no hay nada ahí
 	}
 	
-	private void remove(GameObject object) {
+	public void remove(GameObject object) {
 		int aux = this.getIndex(object.getX(), object.getY());
 		// Reordenar
 		if(aux != - 1) {
@@ -78,7 +78,11 @@ public class GameObjectBoard {
 		for (int i = 0; i < this.currentObjects; i ++) {
 			GameObject other = objects[i];
 			if (object != other)
-				object.performAttack(other);
+				if(object.performAttack(other)) {
+					if(other.getLive() <= 0) {
+						other.onDelete();
+					}
+				}
 		}
 	}
 	
@@ -109,4 +113,30 @@ public class GameObjectBoard {
 			return aux.toString();
 		}
 	}
+	
+	public void reorderLaser(UCMShipLaser laser) {
+		int aux = this.getIndex(laser.getX(), laser.getY());
+		GameObject object = null;
+		// Reordenar
+		if(aux != - 1) {
+			for(int i =  aux; i < getCurrentObjects() - 1; i++) {
+				object = objects[i];
+				objects[i] = objects[i + 1];
+				objects[i + 1] = object;
+			}
+		}
+	}
+	
+	public void doDamage(int x, int y) {
+		if(-1 < x && x < 8 && -1 < y && y < 9) {
+			int aux = this.getIndex(x, y);
+			if(aux != -1) {
+				this.objects[aux].getDamage(1);
+				if(this.objects[aux].getLive() == 0) {
+					this.objects[aux].onDelete();
+				}
+			}
+		}
+	}
+	
 }

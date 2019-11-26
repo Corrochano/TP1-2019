@@ -23,9 +23,9 @@ public abstract class EnemyShip extends Ship{
 		if(this instanceof Ovni && this.live <= 0) {
 			this.game.enableShockWave();
 		}
-		if(this.live <= 0) {
-			this.onDelete();
-		}
+//		if(this.live <= 0) {
+//			this.onDelete();
+//		}
 		return true;
 	} 
 	

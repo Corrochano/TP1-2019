@@ -40,8 +40,8 @@ public class UCMShipLaser extends Weapon {
 	@Override
 	public void onDelete() {
 		// TODO Auto-generated method stub
-		this.x = -1;
-		this.y = -1;
+		this.x = -7;
+		this.y = -7;
 		this.game.enableMissile();
 	}
 

@@ -1,7 +1,6 @@
 package tp.p2.p2.logic.objects;
 
 import tp.p2.p2.logic.Game;
-import tp.p2.p2.logic.lists.GameObjectBoard;
 
 public class Shockwave extends Weapon {
 

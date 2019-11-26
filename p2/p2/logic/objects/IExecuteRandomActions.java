@@ -12,4 +12,9 @@ public interface IExecuteRandomActions {
 	static boolean canGenerateRandomBomb(Game game){
 		return ((Random) game.getRandom()).nextDouble() < ((Level) game.getLevel()).getOvniFrequency();
 	}
+	
+	static boolean canGenerateExplosiveShip(Game game){
+		return ((Random) game.getRandom()).nextDouble() < ((Level) game.getLevel()).getExplosiveFrequency();
+	}
+	
 }
