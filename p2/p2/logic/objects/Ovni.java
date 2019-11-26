@@ -11,7 +11,7 @@ public class Ovni extends EnemyShip{
 	private boolean enable;
 	
 	public Ovni(Game game) { // 0 y 8 parámetro
-		super(game, -1, -1, 1, POINTS);
+		super(game, -2, -2, LIFE, POINTS);
 		this.setEnable(false);
 	}
 
@@ -35,8 +35,6 @@ public class Ovni extends EnemyShip{
 			this.x = INIT_X;
 			this.y = INIT_Y + 1;
 		}
-		
-		
 	}
 
 	@Override
@@ -44,8 +42,9 @@ public class Ovni extends EnemyShip{
 		// TODO Auto-generated method stub
 		super.onDelete();
 		this.setEnable(false);
-		this.x = -1;
-		this.y = -1;
+		this.live = LIFE;
+		this.x = -2;
+		this.y = -2;
 		
 	}
 
@@ -56,8 +55,8 @@ public class Ovni extends EnemyShip{
 			this.y -= 1;
 			if(this.y < 0) {
 				this.setEnable(false);
-				this.x = -1;
-				this.y = -1;
+				this.x = -2;
+				this.y = -2;
 			}
 		}
 		

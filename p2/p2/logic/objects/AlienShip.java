@@ -78,4 +78,13 @@ public abstract class AlienShip extends EnemyShip {
 		REMAINING_ALIENS = 0;
 	}
 	
+	@Override
+	public boolean receiveShockWaveAttack(int damage) {
+		this.getDamage(damage);
+		if(this.live <= 0) {
+			this.onDelete();
+		}
+		return true;
+	}
+	
 }

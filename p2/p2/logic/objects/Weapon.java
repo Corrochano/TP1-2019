@@ -31,7 +31,7 @@ public abstract class Weapon extends GameObject {
 	}
 
 	@Override
-	public boolean performAttack(GameObject other) {
+	public boolean performAttack(GameObject other) { 
 		if(this.x == other.getX() && this.y == other.getY()) {
 			return true;
 		}

@@ -65,6 +65,9 @@ public class GameObjectBoard {
 		for(int i = 0; i < getCurrentObjects(); i++) {
 			objects[i].move();
 			checkAttacks(this.objects[i]);
+			if(objects[i] instanceof Shockwave) {
+				objects[i].onDelete();
+			}
 		}
 		this.removeDead();
 	}
@@ -85,11 +88,16 @@ public class GameObjectBoard {
 	}
 	
 	private void removeDead() {
-		for(int i = 0; i < this.currentObjects; i++) {
+		for(int i = this.currentObjects - 1; i >= 0; i--) {
 			if(this.objects[i].getLive() <= 0) {
 				remove(objects[i]);
 			}
 		}
+//		for(int i = 0; i < this.currentObjects; i++) {
+//			if(this.objects[i].getLive() <= 0) {
+//				remove(objects[i]);
+//			}
+//		}
 	}
 	
 	public String toString(int x, int y) {

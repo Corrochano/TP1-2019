@@ -97,4 +97,40 @@ public class UCMShip extends Ship {
 		return true;
 	}
 	
+	public boolean shootLaser(UCMShipLaser laser) {
+		// TODO Auto-generated method stub
+		if(this.getCanShootLaser()) {
+			laser.setX(this.getX());
+			laser.setY(this.getY());
+			this.game.disableMissile();
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	public boolean shockWave() {
+		// TODO Auto-generated method stub
+		if(this.getHasShockWave()) {
+			this.game.setShockwaveEnable(false);
+			this.setHasShockWave(false);
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+	
+	public boolean move(int numCells) {
+		// TODO Auto-generated method stub
+		if(this.game.isOnBoard(this.getX(), this.getY() + numCells)) {
+			this.setY(this.getY() + numCells);
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+	
 }

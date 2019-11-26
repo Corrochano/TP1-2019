@@ -42,7 +42,6 @@ public class UCMShipLaser extends Weapon {
 		// TODO Auto-generated method stub
 		this.x = -1;
 		this.y = -1;
-		this.live = 0;
 		this.game.enableMissile();
 	}
 

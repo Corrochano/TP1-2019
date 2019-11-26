@@ -8,11 +8,9 @@ import tp.p2.p2.logic.lists.GameObjectBoard;
 import tp.p2.p2.logic.objects.AlienShip;
 import tp.p2.p2.logic.objects.GameObject;
 import tp.p2.p2.logic.objects.IPlayerController;
-import tp.p2.p2.logic.objects.Ovni;
+import tp.p2.p2.logic.objects.Shockwave;
 import tp.p2.p2.logic.objects.UCMShip;
 import tp.p2.p2.logic.objects.UCMShipLaser;
-
-import java.util.Random;
 
 public class Game implements IPlayerController{
 	public final static int DIM_X = 8;
@@ -22,6 +20,8 @@ public class Game implements IPlayerController{
 	private Level level;
 	GameObjectBoard board;
 	private UCMShip player;
+	private UCMShipLaser laser;
+	private Shockwave shockwave;
 	private boolean doExit;
 	private BoardInitializer initializer ;
 	private int points;
@@ -38,7 +38,11 @@ public class Game implements IPlayerController{
 		this.points = 0;
 		board = initializer.initialize(this, level);
 		player = new UCMShip(this, DIM_X - 1, DIM_Y / 2);
+		laser = new UCMShipLaser(this, -1, -1);
+		shockwave = new Shockwave(this);
 		board.add(player);
+		board.add(laser);
+		board.add(shockwave);
 	}
 	
 	public Random getRandom() {
@@ -123,15 +127,7 @@ public class Game implements IPlayerController{
 	
 	@Override
 	public boolean move(int numCells) {
-		// TODO Auto-generated method stub
-		if(this.isOnBoard(this.player.getX(), this.player.getY() + numCells)) {
-			this.player.setY(this.player.getY() + numCells);
-			return true;
-		}
-		else {
-			//System.out.println("You can´t move so far away.");
-			return false;
-		}
+		return this.player.move(numCells);
 	}
 	
 	public void list() {
@@ -144,21 +140,12 @@ public class Game implements IPlayerController{
 
 	@Override
 	public boolean shootLaser() {
-		// TODO Auto-generated method stub
-		if(this.getMissileEnable()) {
-			this.board.add(new UCMShipLaser(this, this.player.getX(), this.player.getY()));
-			this.disableMissile();
-			return true;
-		}
-		else {
-			return false;
-		}
+		return this.player.shootLaser(this.laser);
 	}
 
 	@Override
 	public boolean shockWave() {
-		// TODO Auto-generated method stub
-		return false;
+		return this.player.shockWave();
 	}
 
 	@Override
@@ -187,5 +174,14 @@ public class Game implements IPlayerController{
 	public void disableMissile() {
 		this.player.setCanShootLaser(false);
 	}
+	
+	public boolean getShockwaveEnable() {
+		return this.shockwave.isEnable();
+	}
+	
+	public void setShockwaveEnable(boolean enable) {
+		this.shockwave.setEnable(enable);
+	}
+	
 	
 }

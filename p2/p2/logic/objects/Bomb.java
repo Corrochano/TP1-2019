@@ -6,10 +6,10 @@ public class Bomb extends Weapon {
 	private DestroyerShip destroyer;
 	private boolean enable;
 	
-	public Bomb(Game game, int x, int y, DestroyerShip destroy) { // Esto no tiene vida
-		super(game, x, y, 1);
+	public Bomb(Game game, DestroyerShip destroy) { // Esto no tiene vida
+		super(game, -1, -1, 1);
 		setDestroyer(destroy);
-		setEnable(false);
+		setEnable(true);
 		this.move = Move.DOWN;
 	}
 
@@ -30,7 +30,7 @@ public class Bomb extends Weapon {
 	}
 	
 	public String toString() {
-		if(isEnable()) {
+		if(!isEnable()) {
 			return ".";
 		}
 		else {
@@ -42,8 +42,7 @@ public class Bomb extends Weapon {
 	@Override
 	public void computerAction() {
 		// TODO Auto-generated method stub
-		//this.destroyer.computerAction();
-		if(this.isEnable()) { // Echar un ojo
+		if(this.isEnable() && IExecuteRandomActions.canGenerateRandomBomb(game)) { // Echar un ojo
 			this.x = this.destroyer.getX() + 1;
 			this.y = this.destroyer.getY();
 			this.setEnable(false);
@@ -55,7 +54,7 @@ public class Bomb extends Weapon {
 		// TODO Auto-generated method stub
 		this.x = -1;
 		this.y = -1;
-		this.destroyer.setCanShootBomb(true);
+		this.live = 1;
 		this.setEnable(true);
 	}
 
@@ -72,6 +71,10 @@ public class Bomb extends Weapon {
 	}
 
 	public void setEnable(boolean enable) {
+		if(!enable) {
+			this.x = destroyer.getX();
+			this.y = destroyer.getY();
+		}
 		this.enable = enable;
 	}
 	

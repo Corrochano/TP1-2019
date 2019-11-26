@@ -57,7 +57,7 @@ public class BoardInitializer {
 		for(int i = 0; i < numDestroyers; i++) {
 			DestroyerShip destroy = new DestroyerShip(this.game, x, y + i);
 			board.add(destroy);
-			//board.add(new Bomb(this.game, destroy.getX() + 1, destroy.getY(), destroy));
+			board.add(new Bomb(this.game, destroy));
 		}
 		
 	}
