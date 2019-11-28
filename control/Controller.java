@@ -29,6 +29,8 @@ public class Controller {
 			}
 			else {
 				System.out.println(unknownCommandMsg);
+				System.out.println("Press Enter To Continue...");
+				new java.util.Scanner(System.in).nextLine();
 			}
 		}
 		System.out.println(game.getWinnerMessage());
