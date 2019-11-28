@@ -6,7 +6,7 @@ import tp.p2.p2.logic.Level;
 public abstract class AlienShip extends EnemyShip {
 	
 	protected static int REMAINING_ALIENS = 0;
-	private static boolean IS_IN_FINAL_ROW;
+	private static boolean IS_IN_FINAL_ROW = false;;
 	protected static int SHIPS_ON_BORDER;
 	protected int cyclesToMove;
 

@@ -69,6 +69,8 @@ public class UCMShip extends Ship {
 				+ "Points: " + this.game.getPoints() + "\n"
 				+ "Super Missiles: "
 				+ this.getSuperMissile() + "\n"
+				+ "Possible Super Missiles: "
+				+ this.game.getPoints()/20 + "\n"
 				+ "Shock Wave: ";
 		 if(hasShockWave) {
 			 ret += "YES\n";
@@ -172,6 +174,7 @@ public class UCMShip extends Ship {
 				laser.enableSuperLaser();
 				laser.setX(this.getX());
 				laser.setY(this.getY());
+				this.superMissile--;
 				this.game.disableMissile();
 				return true;
 			}
