@@ -16,7 +16,7 @@ public class ShootCommand extends Command {
 	@SuppressWarnings("resource")
 	@Override
 	public boolean execute(Game game) {
-		if(this.myCommandWords[1].equals("n") || this.myCommandWords[1].equals("normal")) {
+		if(this.myCommandWords.length == 1) {
 			if(game.shootLaser()) {
 				game.update();
 				return true;
