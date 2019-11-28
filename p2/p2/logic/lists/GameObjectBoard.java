@@ -1,6 +1,9 @@
 package tp.p2.p2.logic.lists;
 import tp.p2.p2.logic.objects.Bomb;
+import tp.p2.p2.logic.objects.DestroyerShip;
+import tp.p2.p2.logic.objects.ExplosiveShip;
 import tp.p2.p2.logic.objects.GameObject;
+import tp.p2.p2.logic.objects.RegularShip;
 import tp.p2.p2.logic.objects.Shockwave;
 import tp.p2.p2.logic.objects.UCMShipLaser;
 
@@ -62,11 +65,17 @@ public class GameObjectBoard {
 	
 	public void update() {
 		// TODO implement
+		int aux;
 		for(int i = 0; i < getCurrentObjects(); i++) {
+			aux = getCurrentObjects();
 			objects[i].move();
-			checkAttacks(this.objects[i]);
 			if(objects[i] instanceof Shockwave) {
-				objects[i].onDelete();
+				checkAttacks(this.objects[i]);
+				//objects[i].onDelete();
+				i -= (aux - getCurrentObjects());
+			}
+			else {
+				checkAttacks(this.objects[i]);
 			}
 		}
 		this.removeDead();
@@ -81,8 +90,15 @@ public class GameObjectBoard {
 				if(object.performAttack(other)) {
 					if(other.getLive() <= 0) {
 						other.onDelete();
+						if(object instanceof Shockwave) {
+							this.remove(other);
+							i--;
+						}
 					}
 				}
+		}
+		if(object instanceof Shockwave) {
+			object.onDelete();
 		}
 	}
 	
@@ -134,6 +150,9 @@ public class GameObjectBoard {
 				this.objects[aux].getDamage(1);
 				if(this.objects[aux].getLive() == 0) {
 					this.objects[aux].onDelete();
+					if((this.objects[aux] instanceof DestroyerShip || this.objects[aux] instanceof RegularShip)) {
+						this.remove(this.objects[aux]);
+					}
 				}
 			}
 		}

@@ -134,8 +134,13 @@ public class Game implements IPlayerController{
 		System.out.println("Command > list\r\n" + 
 				"[R]egular ship: Points: 5 - Harm: 0 - Shield: 2\r\n" + 
 				"[D]estroyer ship: Points: 10 - Harm: 1 - Shield: 1\r\n" + 
+				"[E]xplosive ship: Points: 5 - Harm: 1 (if they dies) - Shield: 1\r\n" +
 				"[O]vni: Points: 25 - Harm: 0 - Shield: 1\r\n" + 
 				"^__^: Harm: 1 - Shield: 3");
+	}
+	
+	public void buySuperMissile() {
+		this.player.addSuperMissile();
 	}
 
 	@Override
@@ -199,6 +204,16 @@ public class Game implements IPlayerController{
 				}
 			}
 		}
+	}
+
+	public void setPoints(int points) {
+		// TODO Auto-generated method stub
+		this.points = points;
+		
+	}
+
+	public boolean shootSuperLaser() {
+		return this.player.shootSuperLaser(this.laser);
 	}
 	
 }

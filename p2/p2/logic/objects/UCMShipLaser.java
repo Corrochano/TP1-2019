@@ -4,10 +4,14 @@ import tp.p2.p2.logic.Game;
 
 public class UCMShipLaser extends Weapon {
 	//private UCMShip ucmShip;
+	private int damage;
+	private boolean isSuperLaser;
 	
 	public UCMShipLaser(Game game, int x, int y) {
 		super(game, x, y, 1);
 		this.move = Move.UP;
+		this.damage = 1;
+		this.setSuperLaser(false);
 	//	setUcmShip(null); // ¿?
 	}
 
@@ -43,6 +47,11 @@ public class UCMShipLaser extends Weapon {
 		this.x = -7;
 		this.y = -7;
 		this.game.enableMissile();
+		
+		if(this.isSuperLaser()) {
+			this.damage = 1;
+			this.setSuperLaser(false);
+		}
 	}
 
 //	public UCMShip getUcmShip() {
@@ -62,8 +71,9 @@ public class UCMShipLaser extends Weapon {
 	@Override
 	public boolean performAttack(GameObject other) {
 		if(super.performAttack(other) && ((other instanceof EnemyShip) || (other instanceof Bomb))){
+			boolean ret = other.receiveMissileAttack(this.damage);
 			this.onDelete();
-			return other.receiveMissileAttack(1);
+			return ret;
 		}
 		else {
 			return false;
@@ -74,4 +84,18 @@ public class UCMShipLaser extends Weapon {
 	protected boolean isEnable() {
 		return this.game.getMissileEnable();
 	}
+
+	public boolean isSuperLaser() {
+		return isSuperLaser;
+	}
+
+	public void setSuperLaser(boolean isSuperLaser) {
+		this.isSuperLaser = isSuperLaser;
+	}
+
+	public void enableSuperLaser() {
+		this.setSuperLaser(true);
+		this.damage = 2;
+	}
+	
 }

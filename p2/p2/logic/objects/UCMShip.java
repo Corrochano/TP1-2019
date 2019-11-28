@@ -4,12 +4,17 @@ import tp.p2.p2.logic.Game;
 
 public class UCMShip extends Ship {
 	//private int points;
+	
+	private static int SUPER_MISSILE_PRICE = 20;
+	
 	private boolean hasShockWave;
 	private boolean canShootLaser;
+	private int superMissile;
 	
 	public UCMShip(Game game, int x, int y) {
 		super(game, x, y, 3);
 		this.setCanShootLaser(true);
+		this.setSuperMissile(0);
 		//setPoints(0);
 	}
 
@@ -62,6 +67,8 @@ public class UCMShip extends Ship {
 		String ret;
 		 ret = "Life: " + this.live + "\n" 
 				+ "Points: " + this.game.getPoints() + "\n"
+				+ "Super Missiles: "
+				+ this.getSuperMissile() + "\n"
 				+ "Shock Wave: ";
 		 if(hasShockWave) {
 			 ret += "YES\n";
@@ -98,7 +105,6 @@ public class UCMShip extends Ship {
 	}
 	
 	public boolean shootLaser(UCMShipLaser laser) {
-		// TODO Auto-generated method stub
 		if(this.getCanShootLaser()) {
 			laser.setX(this.getX());
 			laser.setY(this.getY());
@@ -111,7 +117,6 @@ public class UCMShip extends Ship {
 	}
 
 	public boolean shockWave() {
-		// TODO Auto-generated method stub
 		if(this.getHasShockWave()) {
 			this.game.setShockwaveEnable(false);
 			this.setHasShockWave(false);
@@ -122,15 +127,68 @@ public class UCMShip extends Ship {
 		}
 	}
 	
+	@SuppressWarnings("resource")
 	public boolean move(int numCells) {
-		// TODO Auto-generated method stub
-		if(this.game.isOnBoard(this.getX(), this.getY() + numCells)) {
+		if(this.game.isOnBoard(this.getX(), this.getY() + numCells) && ((numCells == 1) || (numCells == -1)
+				|| (numCells == 2) || (numCells == -2))) {
 			this.setY(this.getY() + numCells);
 			return true;
 		}
 		else {
+			System.out.println("You can't move so far away.");
+			System.out.println("Press Enter To Continue...");
+			new java.util.Scanner(System.in).nextLine();
 			return false;
 		}
+	}
+
+
+	public int getSuperMissile() {
+		return superMissile;
+	}
+
+
+	public void setSuperMissile(int superMissile) {
+		this.superMissile = superMissile;
+	}
+	
+	public void addSuperMissile() {
+		if(this.game.getPoints() >= SUPER_MISSILE_PRICE) {
+			this.superMissile += 1;
+			this.game.setPoints(this.game.getPoints() - SUPER_MISSILE_PRICE);
+		}
+		else {
+			System.out.println("You don't have enough points.");
+			System.out.println("Press Enter To Continue...");
+			new java.util.Scanner(System.in).nextLine();
+		}
+	}
+
+
+	@SuppressWarnings("resource")
+	public boolean shootSuperLaser(UCMShipLaser laser) {
+		if(this.superMissile > 0) {
+			if(this.getCanShootLaser()) {
+				laser.enableSuperLaser();
+				laser.setX(this.getX());
+				laser.setY(this.getY());
+				this.game.disableMissile();
+				return true;
+			}
+			else {
+				System.out.println("You have already shooted");
+				System.out.println("Press Enter To Continue...");
+		        new java.util.Scanner(System.in).nextLine();
+				return false;
+			}
+		}
+		else {
+			System.out.println("You don't have SuperMissiles.");
+			System.out.println("Press Enter To Continue...");
+	        new java.util.Scanner(System.in).nextLine();
+			return false;
+		}
+		
 	}
 	
 }
