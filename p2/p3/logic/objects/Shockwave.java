@@ -58,4 +58,9 @@ public class Shockwave extends Weapon {
 		this.enable = enable;
 	}	
 	
+	@Override
+	public String stringify() {
+		return null;
+	}
+	
 }

@@ -98,4 +98,25 @@ public class UCMShipLaser extends Weapon {
 		this.damage = 2;
 	}
 	
+	@Override
+	public String stringify() {
+		String ret;
+		if(!isEnable()) {
+			if(this.isSuperLaser()) {
+				ret = "X: ";
+			}
+			else {
+				ret = "M: ";
+			}
+			ret += Integer.valueOf(this.x)
+					+", "
+					+ Integer.valueOf(this.y)
+					+ "\n";
+			return ret;
+		}
+		else {
+			return null;
+		}
+	}
+	
 }

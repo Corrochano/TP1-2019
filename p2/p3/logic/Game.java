@@ -2,7 +2,6 @@ package tp.p2.p3.logic;
 
 import java.util.Random;
 
-import tp.p2.p3.logic.GamePrinter;
 import tp.p2.p3.logic.Level;
 import tp.p2.p3.logic.lists.GameObjectBoard;
 import tp.p2.p3.logic.objects.AlienShip;
@@ -11,6 +10,7 @@ import tp.p2.p3.logic.objects.IPlayerController;
 import tp.p2.p3.logic.objects.Shockwave;
 import tp.p2.p3.logic.objects.UCMShip;
 import tp.p2.p3.logic.objects.UCMShipLaser;
+import tp.p2.p3.view.BoardPrinter;
 
 public class Game implements IPlayerController{
 	public final static int DIM_X = 8;
@@ -23,7 +23,7 @@ public class Game implements IPlayerController{
 	private UCMShipLaser laser;
 	private Shockwave shockwave;
 	private boolean doExit;
-	private BoardInitializer initializer ;
+	private BoardInitializer initializer;
 	private int points;
 	
 	public Game (Level level, Random random){
@@ -109,15 +109,15 @@ public class Game implements IPlayerController{
 	}
 	
 	
-	// toString()
-	@Override
-	public String toString() {
+	// toString() Pasa a Controller
+	//@Override
+	/*public String toString() {
 		String ret;
-		GamePrinter gamePrinter = new GamePrinter(this, DIM_X ,DIM_Y);
+		BoardPrinter gamePrinter = new BoardPrinter(this, DIM_X ,DIM_Y);
 		ret = infoToString();
 		ret += gamePrinter.toString();
 		return ret;
-	}
+	}*/
 	
 	public int getPoints() {
 		return this.points;
@@ -215,5 +215,20 @@ public class Game implements IPlayerController{
 	public boolean shootSuperLaser() {
 		return this.player.shootSuperLaser(this.laser);
 	}
+
+	public String stringify() {
+		String ret;
+		ret = "— Space Invaders v2.0"
+				+ "\n"
+				+ "G: "
+				+ Integer.valueOf(this.currentCycle)
+				+ "\n"
+				+ "Level: "
+				+ this.level.toString(); // OJO, no sé si funciona
+		ret += board.stringify();
+		return ret;
+	}
+	
+	
 	
 }

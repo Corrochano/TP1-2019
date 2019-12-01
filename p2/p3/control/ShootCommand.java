@@ -1,6 +1,8 @@
 package tp.p2.p3.control;
 
 import tp.p2.p3.logic.Game;
+import tp.p2.p3.view.GamePrinter;
+import tp.p2.p3.view.PrinterGenerator;
 
 public class ShootCommand extends Command {
 	protected final static String name = "shoot";
@@ -15,7 +17,8 @@ public class ShootCommand extends Command {
 
 	@SuppressWarnings("resource")
 	@Override
-	public boolean execute(Game game) {
+	public boolean execute(Game game, GamePrinter printer) {
+		printer = PrinterGenerator.useBoardPrinter();
 		if(this.myCommandWords.length == 1) {
 			if(game.shootLaser()) {
 				game.update();

@@ -46,6 +46,7 @@ public class BoardInitializer {
 		int numDestroyers = this.level.getNumDestroyerAliens();
 		int y = 0;
 		int x = this.level.getNumRowsOfRegularAliens() + 1;
+		int number = 1;
 		
 		if(destroyersPerRow == 2) {
 			y = 4;
@@ -55,9 +56,10 @@ public class BoardInitializer {
 		}
 		
 		for(int i = 0; i < numDestroyers; i++) {
-			DestroyerShip destroy = new DestroyerShip(this.game, x, y + i);
+			DestroyerShip destroy = new DestroyerShip(this.game, x, y + i, number);
 			board.add(destroy);
 			board.add(new Bomb(this.game, destroy));
+			number++;
 		}
 		
 	}

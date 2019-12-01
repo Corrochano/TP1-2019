@@ -12,7 +12,7 @@ public class RegularShip extends AlienShip{
 	}
 	
 	public String toString() {
-		return "C[" + this.getLive() + "]";
+		return "R[" + this.getLive() + "]";
 	}
 	
 	@Override
@@ -26,6 +26,21 @@ public class RegularShip extends AlienShip{
 			this.game.reorderLaser();
 		}
 		
+	}
+
+	@Override
+	public String stringify() {
+		return "R: "
+				+ Integer.valueOf(this.x)
+				+", "
+				+ Integer.valueOf(this.y)
+				+"; "
+				+ Integer.valueOf(this.live)
+				+"; "
+				+ Integer.valueOf(this.cyclesToMove)
+				+ "; "
+				+ this.move.toString()
+				+ "\n";
 	}
 	
 }

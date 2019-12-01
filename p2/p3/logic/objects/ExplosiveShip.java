@@ -29,4 +29,18 @@ public class ExplosiveShip extends AlienShip {
 		this.game.doExplosion(this.x, this.y);
 	}
 
+	@Override
+	public String stringify() {
+		return "E: "
+				+ Integer.valueOf(this.x)
+				+", "
+				+ Integer.valueOf(this.y)
+				+"; "
+				+ Integer.valueOf(this.live)
+				+"; "
+				+ Integer.valueOf(this.cyclesToMove)
+				+ this.move.toString()
+				+ "\n";
+	}
+	
 }

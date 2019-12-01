@@ -1,7 +1,5 @@
 package tp.p2.p3.logic.objects;
 import tp.p2.p3.logic.Game;
-import tp.p2.p3.logic.Level;
-import tp.p2.p3.logic.lists.GameObjectBoard;
 
 public abstract class GameObject implements IAttack {
 	protected int x;
@@ -39,4 +37,5 @@ public abstract class GameObject implements IAttack {
 	public abstract void onDelete();
 	public abstract void move();
 	public abstract String toString();
+	public abstract String stringify();
 }

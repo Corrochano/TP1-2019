@@ -1,7 +1,5 @@
 package tp.p2.p3.logic.lists;
-import tp.p2.p3.logic.objects.Bomb;
 import tp.p2.p3.logic.objects.DestroyerShip;
-import tp.p2.p3.logic.objects.ExplosiveShip;
 import tp.p2.p3.logic.objects.GameObject;
 import tp.p2.p3.logic.objects.RegularShip;
 import tp.p2.p3.logic.objects.Shockwave;
@@ -10,8 +8,6 @@ import tp.p2.p3.logic.objects.UCMShipLaser;
 public class GameObjectBoard {
 	private GameObject[] objects;
 	private int currentObjects;
-	private int width;
-	private int height;
 	
 	public GameObjectBoard (int width, int height) {
 		// TODO implement
@@ -156,6 +152,18 @@ public class GameObjectBoard {
 				}
 			}
 		}
+	}
+
+	public String stringify() { // Llamar al Stringify de todos
+		String ret = "\n";
+		String aux;
+		for(int i = 0; i < getCurrentObjects(); i++) {
+			aux = this.objects[i].stringify();
+			if(aux != null) {
+				ret += aux;
+			}
+		}
+		return ret;
 	}
 	
 }

@@ -99,5 +99,21 @@ public class Bomb extends Weapon {
 			return false;
 		}
 	}
+
+	@Override
+	public String stringify() {
+		if(!this.isEnable()) {
+			return "B: "
+					+ Integer.valueOf(this.x)
+					+", "
+					+ Integer.valueOf(this.y)
+					+ " - "
+					+ Integer.valueOf(this.destroyer.getNumber())
+					+ "\n";
+		}
+		else {
+			return null;
+		}
+	}
 	
 }

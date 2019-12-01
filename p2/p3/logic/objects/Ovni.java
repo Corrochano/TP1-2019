@@ -70,4 +70,20 @@ public class Ovni extends EnemyShip{
 		this.enable = enable;
 	}
 	
+	@Override
+	public String stringify() {
+		if(this.isEnable()) {
+			return "O: "
+					+ Integer.valueOf(this.x)
+					+", "
+					+ Integer.valueOf(this.y)
+					+ "; "
+					+Integer.valueOf(this.live)
+					+ "\n";
+		}
+		else {
+			return null;
+		}
+	}
+	
 }

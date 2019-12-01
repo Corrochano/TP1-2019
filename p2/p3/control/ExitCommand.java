@@ -1,6 +1,7 @@
 package tp.p2.p3.control;
 
 import tp.p2.p3.logic.Game;
+import tp.p2.p3.view.GamePrinter;
 
 public class ExitCommand extends Command{
 	protected final static String name = "exit";
@@ -13,7 +14,7 @@ public class ExitCommand extends Command{
 	}
 
 	@Override
-	public boolean execute(Game game) {
+	public boolean execute(Game game, GamePrinter printer) { //¿Que printer usa?
 		game.exit();
 		return false;
 	}

@@ -1,6 +1,7 @@
 package tp.p2.p3.control;
 
 import tp.p2.p3.logic.Game;
+import tp.p2.p3.view.GamePrinter;
 
 public class UpdateCommand extends Command{
 	protected final static String name = "none";
@@ -14,8 +15,9 @@ public class UpdateCommand extends Command{
 	}
 
 	@Override
-	public boolean execute(Game game) {
+	public boolean execute(Game game, GamePrinter printer) {
 		game.update();
+		
 		return true;
 	}
 

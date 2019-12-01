@@ -194,4 +194,29 @@ public class UCMShip extends Ship {
 		
 	}
 	
+	@Override
+	public String stringify() {
+		String ret = "P: "
+				+ Integer.valueOf(this.x)
+				+", "
+				+ Integer.valueOf(this.y)
+				+"; "
+				+ Integer.valueOf(this.live)
+				+ "; "
+				+ Integer.valueOf(this.game.getPoints())
+				+ "; ";
+			if(this.getHasShockWave()) {
+				ret += "true"
+						+ "; ";
+			}
+			else {
+				ret += "false"
+						+ "; ";
+			}
+		
+			ret += Integer.valueOf(this.superMissile)
+					+ "\n";
+			return ret;
+	}
+	
 }
