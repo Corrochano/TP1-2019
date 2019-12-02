@@ -41,13 +41,17 @@ public class SaveCommand extends Command{
 				e.printStackTrace();
 			} finally {
 					try {
-						b.close();
+						if(b != null) {
+							b.close();
+						}
 					} catch (IOException e) {
 						e.printStackTrace();
 					}
 				
 					try {
-						f.close();
+						if(f != null) {
+							f.close();
+						}
 					} catch (IOException e) {
 						e.printStackTrace();
 					}
