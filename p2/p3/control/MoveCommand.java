@@ -2,7 +2,6 @@ package tp.p2.p3.control;
 
 import tp.p2.p3.exceptions.CommandExecuteException;
 import tp.p2.p3.logic.Game;
-import tp.p2.p3.view.GamePrinter;
 
 public class MoveCommand extends Command{
 	protected final static String name = "move";
@@ -16,7 +15,7 @@ public class MoveCommand extends Command{
 	}
 
 	@Override
-	public boolean execute(Game game, GamePrinter printer) throws CommandExecuteException {
+	public boolean execute(Game game) throws CommandExecuteException {
 		int aux = 0;
 		if(this.myCommandWords.length == 3) {
 			if(this.myCommandWords[1].equals("left") || this.myCommandWords[1].equals("l")) {

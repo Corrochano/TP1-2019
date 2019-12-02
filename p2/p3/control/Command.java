@@ -2,7 +2,6 @@ package tp.p2.p3.control;
 
 import tp.p2.p3.exceptions.CommandExecuteException;
 import tp.p2.p3.logic.Game;
-import tp.p2.p3.view.GamePrinter;
 
 public abstract class Command {
 protected final String name;
@@ -21,7 +20,7 @@ protected static final String incorrectArgsMsg = "Incorrect argument format";
 		this.help = help;
 	}
 	
-	public abstract boolean execute(Game game, GamePrinter printer) throws CommandExecuteException;
+	public abstract boolean execute(Game game) throws CommandExecuteException;
 	public abstract Command parse(String[] commandWords);
 	
 	

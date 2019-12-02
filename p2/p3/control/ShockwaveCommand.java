@@ -2,8 +2,6 @@ package tp.p2.p3.control;
 
 import tp.p2.p3.exceptions.CommandExecuteException;
 import tp.p2.p3.logic.Game;
-import tp.p2.p3.view.GamePrinter;
-import tp.p2.p3.view.PrinterGenerator;
 
 public class ShockwaveCommand extends Command {
 	protected final static String name = "shockwave";
@@ -16,8 +14,7 @@ public class ShockwaveCommand extends Command {
 	}
 
 	@Override
-	public boolean execute(Game game, GamePrinter printer) throws CommandExecuteException {
-		printer = PrinterGenerator.useBoardPrinter();
+	public boolean execute(Game game) throws CommandExecuteException {
 		game.shockWave();
 		game.update();
 		return true;

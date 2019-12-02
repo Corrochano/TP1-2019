@@ -1,8 +1,6 @@
 package tp.p2.p3.control;
 
 import tp.p2.p3.logic.Game;
-import tp.p2.p3.view.GamePrinter;
-import tp.p2.p3.view.PrinterGenerator;
 
 public class HelpCommand extends Command {
 	
@@ -17,8 +15,7 @@ public class HelpCommand extends Command {
 
 	@SuppressWarnings("resource")
 	@Override
-	public boolean execute(Game game, GamePrinter printer) {
-		printer = PrinterGenerator.useBoardPrinter();
+	public boolean execute(Game game) {
 		System.out.print(CommandGenerator.commandHelp());
 		System.out.println("Press Enter To Continue...");
         new java.util.Scanner(System.in).nextLine();

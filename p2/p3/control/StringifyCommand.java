@@ -9,13 +9,14 @@ public class StringifyCommand extends Command {
 	protected final static String shortcut = "z";
 	private final static String details = "stringify[z]";
 	private final static String help = "Transform the game into a string.";
+	private GamePrinter printer;
 	
 	public StringifyCommand() {
 		super(StringifyCommand.name, StringifyCommand.shortcut, StringifyCommand.details, StringifyCommand.help);
 	}
 
 	@Override
-	public boolean execute(Game game, GamePrinter printer) {
+	public boolean execute(Game game) {
 		printer = PrinterGenerator.useStringifier();
 		System.out.println(printer.toString(game));
 		return false;

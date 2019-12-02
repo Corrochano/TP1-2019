@@ -6,7 +6,6 @@ import java.io.IOException;
 
 import tp.p2.p3.exceptions.CommandExecuteException;
 import tp.p2.p3.logic.Game;
-import tp.p2.p3.view.GamePrinter;
 
 public class SaveCommand extends Command{
 	
@@ -30,7 +29,7 @@ public class SaveCommand extends Command{
 	
 	
 	@Override
-	public boolean execute(Game game, GamePrinter printer) throws CommandExecuteException {
+	public boolean execute(Game game) throws CommandExecuteException {
 		if(myCommandWords.length == 2) {
 			this.fileName = myCommandWords[1] + ".dat";
 			try {
@@ -56,7 +55,9 @@ public class SaveCommand extends Command{
 						e.printStackTrace();
 					}
 			}
-			System.out.println("Game saved");
+			System.out.println("Game successfully saved in file "
+					+ this.fileName 
+					+" Use the load command to reload it");
 			return false;
 		}
 		else {

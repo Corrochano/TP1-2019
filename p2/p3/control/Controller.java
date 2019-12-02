@@ -30,7 +30,7 @@ public class Controller {
 			try {
 				Command command = CommandGenerator.parseCommand(comando);
 				if(command != null) {
-					if (command.execute(game, printer)) {
+					if (command.execute(game)) {
 						System.out.println(printer.toString(game)); // Normalmente será BoardPrinter
 					}
 				}

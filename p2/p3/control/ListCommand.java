@@ -1,8 +1,6 @@
 package tp.p2.p3.control;
 
 import tp.p2.p3.logic.Game;
-import tp.p2.p3.view.GamePrinter;
-import tp.p2.p3.view.PrinterGenerator;
 
 public class ListCommand extends Command{
 	protected final static String name = "list";
@@ -16,8 +14,7 @@ public class ListCommand extends Command{
 
 	@SuppressWarnings("resource")
 	@Override
-	public boolean execute(Game game, GamePrinter printer) {
-		printer = PrinterGenerator.useBoardPrinter();
+	public boolean execute(Game game) {
 		game.list();
 		System.out.println("Press Enter To Continue...");
         new java.util.Scanner(System.in).nextLine();
