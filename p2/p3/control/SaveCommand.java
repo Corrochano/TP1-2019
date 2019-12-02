@@ -16,8 +16,8 @@ public class SaveCommand extends Command{
 	private final static String help = "This command saves the current game game in a .dat archive.";
 	private String[] myCommandWords;
 	private String fileName;
-	private FileWriter fw;
-	private BufferedWriter bw;
+	private FileWriter f;
+	private BufferedWriter b;
 
 	public SaveCommand() {
 		super(SaveCommand.name, SaveCommand.shortcut, SaveCommand.details, SaveCommand.help);
@@ -34,20 +34,20 @@ public class SaveCommand extends Command{
 		if(myCommandWords.length == 2) {
 			this.fileName = myCommandWords[1] + ".dat";
 			try {
-				fw = new FileWriter(this.fileName);
-				bw = new BufferedWriter(fw);
-				bw.write(game.stringify());
+				f = new FileWriter(this.fileName);
+				b = new BufferedWriter(f);
+				b.write(game.stringify());
 			} catch (IOException e) {
 				e.printStackTrace();
 			} finally {
 					try {
-						bw.close();
+						b.close();
 					} catch (IOException e) {
 						e.printStackTrace();
 					}
 				
 					try {
-						fw.close();
+						f.close();
 					} catch (IOException e) {
 						e.printStackTrace();
 					}
