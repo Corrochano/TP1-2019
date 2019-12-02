@@ -107,41 +107,34 @@ public class UCMShip extends Ship {
 		return true;
 	}
 	
-	public boolean shootLaser(UCMShipLaser laser) {
+	public void shootLaser(UCMShipLaser laser) throws CommandExecuteException {
 		if(this.getCanShootLaser()) {
 			laser.setX(this.getX());
 			laser.setY(this.getY());
 			this.game.disableMissile();
-			return true;
 		}
 		else {
-			return false;
+			throw new CommandExecuteException("You have already shooted");
 		}
 	}
 
-	public boolean shockWave() {
+	public void shockWave() throws CommandExecuteException {
 		if(this.getHasShockWave()) {
 			this.game.setShockwaveEnable(false);
 			this.setHasShockWave(false);
-			return true;
 		}
 		else {
-			return false;
+			throw new CommandExecuteException("ShockWave is disable");
 		}
 	}
 	
-	@SuppressWarnings("resource")
-	public boolean move(int numCells) {
+	public void move(int numCells) throws CommandExecuteException {
 		if(this.game.isOnBoard(this.getX(), this.getY() + numCells) && ((numCells == 1) || (numCells == -1)
 				|| (numCells == 2) || (numCells == -2))) {
 			this.setY(this.getY() + numCells);
-			return true;
 		}
 		else {
-//			System.out.println("You can't move so far away.");
-//			System.out.println("Press Enter To Continue...");
-//			new java.util.Scanner(System.in).nextLine();
-			return false;
+			throw new CommandExecuteException("You can't move so far away");
 		}
 	}
 
@@ -170,7 +163,7 @@ public class UCMShip extends Ship {
 	}
 
 
-	public boolean shootSuperLaser(UCMShipLaser laser) throws CommandExecuteException {
+	public void shootSuperLaser(UCMShipLaser laser) throws CommandExecuteException {
 		if(this.superMissile > 0) {
 			if(this.getCanShootLaser()) {
 				laser.enableSuperLaser();
@@ -178,7 +171,6 @@ public class UCMShip extends Ship {
 				laser.setY(this.getY());
 				this.superMissile--;
 				this.game.disableMissile();
-				return true;
 			}
 			else {
 				throw new CommandExecuteException("You have already shooted.");

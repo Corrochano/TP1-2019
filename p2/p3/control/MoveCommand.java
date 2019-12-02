@@ -31,14 +31,9 @@ public class MoveCommand extends Command{
 			}
 		
 			if(aux != 0) {
-				if(game.move(aux)) {
+				game.move(aux);
 					game.update();
 					return true;
-				}
-				else {
-					throw new CommandExecuteException("You can't move so far away.");
-					//return false;
-				}
 			}
 			else {
 				throw new CommandExecuteException("You can't move 0 cells.");

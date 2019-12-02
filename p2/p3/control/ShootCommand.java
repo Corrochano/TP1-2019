@@ -20,27 +20,14 @@ public class ShootCommand extends Command {
 	public boolean execute(Game game, GamePrinter printer) throws CommandExecuteException {
 		printer = PrinterGenerator.useBoardPrinter();
 		if(this.myCommandWords.length == 1) {
-			if(game.shootLaser()) {
-				game.update();
-				return true;
-			}
-			else {
-				throw new CommandExecuteException("You have already shooted");
-//				System.out.println("You have already shooted");
-//				System.out.println("Press Enter To Continue...");
-//		        new java.util.Scanner(System.in).nextLine();
-//				return false;
-			}
+			game.shootLaser();
+			game.update();
+			return true;
 		}
 		else if (this.myCommandWords[1].equals("supermissile") || this.myCommandWords[1].equals("s")){
-			if(game.shootSuperLaser()) {
+			game.shootSuperLaser();
 				game.update();
 				return true;
-			}
-			else {
-				throw new CommandExecuteException("You have already shooted or you don't have super missile."); // Aquí no se va a meter nunca
-//				return false;
-			}
 		}
 		else {
 			throw new CommandExecuteException("Argument error.");

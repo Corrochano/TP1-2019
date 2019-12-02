@@ -126,8 +126,8 @@ public class Game implements IPlayerController{
 	// TODO implementar los métodos del interfaz IPlayerController
 	
 	@Override
-	public boolean move(int numCells) {
-		return this.player.move(numCells);
+	public void move(int numCells) throws CommandExecuteException {
+		this.player.move(numCells);
 	}
 	
 	public void list() {
@@ -144,13 +144,13 @@ public class Game implements IPlayerController{
 	}
 
 	@Override
-	public boolean shootLaser() {
-		return this.player.shootLaser(this.laser);
+	public void shootLaser() throws CommandExecuteException {
+		this.player.shootLaser(this.laser);
 	}
 
 	@Override
-	public boolean shockWave() {
-		return this.player.shockWave();
+	public void shockWave() throws CommandExecuteException {
+		this.player.shockWave();
 	}
 
 	@Override
@@ -207,13 +207,12 @@ public class Game implements IPlayerController{
 	}
 
 	public void setPoints(int points) {
-		// TODO Auto-generated method stub
 		this.points = points;
 		
 	}
 
-	public boolean shootSuperLaser() throws CommandExecuteException {
-		return this.player.shootSuperLaser(this.laser);
+	public void shootSuperLaser() throws CommandExecuteException {
+		this.player.shootSuperLaser(this.laser);
 	}
 
 	public String stringify() {
@@ -224,7 +223,7 @@ public class Game implements IPlayerController{
 				+ Integer.valueOf(this.currentCycle)
 				+ "\n"
 				+ "Level: "
-				+ this.level.toString(); // OJO, no sé si funciona
+				+ this.level.toString();
 		ret += board.stringify();
 		return ret;
 	}

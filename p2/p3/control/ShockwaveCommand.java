@@ -18,17 +18,9 @@ public class ShockwaveCommand extends Command {
 	@Override
 	public boolean execute(Game game, GamePrinter printer) throws CommandExecuteException {
 		printer = PrinterGenerator.useBoardPrinter();
-		if(game.shockWave()) {
-			game.update();
-			return true;
-		}
-		else {
-			throw new CommandExecuteException("ShockWave is disable");
-//			System.out.println("Shock Wave is disable");
-//			System.out.println("Press Enter To Continue...");
-//	        new java.util.Scanner(System.in).nextLine();
-//	        return false;
-		}
+		game.shockWave();
+		game.update();
+		return true;
 	}
 
 	@Override
