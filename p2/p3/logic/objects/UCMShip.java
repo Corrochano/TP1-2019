@@ -59,12 +59,10 @@ public class UCMShip extends Ship {
 
 	@Override
 	public void move() {
-		// TODO Auto-generated method stub
 		
 	}
 
 	public String stateToString() {
-		// TODO Auto-generated method stub
 		String ret;
 		 ret = "Life: " + this.live + "\n" 
 				+ "Points: " + this.game.getPoints() + "\n"
@@ -148,17 +146,13 @@ public class UCMShip extends Ship {
 		this.superMissile = superMissile;
 	}
 	
-	public boolean addSuperMissile() {
+	public void addSuperMissile() throws CommandExecuteException {
 		if(this.game.getPoints() >= SUPER_MISSILE_PRICE) {
 			this.superMissile += 1;
 			this.game.setPoints(this.game.getPoints() - SUPER_MISSILE_PRICE);
-			return true;
 		}
 		else {
-//			System.out.println("You don't have enough points.");
-//			System.out.println("Press Enter To Continue...");
-//			new java.util.Scanner(System.in).nextLine();
-			return false;
+			throw new CommandExecuteException("You don't have enough points.");
 		}
 	}
 

@@ -14,7 +14,7 @@ public class ExitCommand extends Command{
 	}
 
 	@Override
-	public boolean execute(Game game, GamePrinter printer) { //¿Que printer usa?
+	public boolean execute(Game game, GamePrinter printer) {
 		game.exit();
 		return false;
 	}

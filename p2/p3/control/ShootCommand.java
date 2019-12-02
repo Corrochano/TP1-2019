@@ -26,15 +26,11 @@ public class ShootCommand extends Command {
 		}
 		else if (this.myCommandWords[1].equals("supermissile") || this.myCommandWords[1].equals("s")){
 			game.shootSuperLaser();
-				game.update();
-				return true;
+			game.update();
+			return true;
 		}
 		else {
 			throw new CommandExecuteException("Argument error.");
-//			System.out.println("Unknow command.");
-//			System.out.println("Press Enter To Continue...");
-//			new java.util.Scanner(System.in).nextLine();
-//			return false;
 		}
 	}
 

@@ -10,7 +10,7 @@ import tp.p2.p3.view.PrinterGenerator;
 
 public class Controller {
 	private static final String PROMPT = "Command > ";
-	private static final String unknownCommandMsg = "Unknown Command";
+//	private static final String unknownCommandMsg = "Unknown Command";
 	
 	private Scanner scan;
 	private Game game;
@@ -34,11 +34,11 @@ public class Controller {
 						System.out.println(printer.toString(game)); // Normalmente será BoardPrinter
 					}
 				}
-				else {
-					System.out.println(unknownCommandMsg);
-					System.out.println("Press Enter To Continue...");
-					new java.util.Scanner(System.in).nextLine();
-				}
+//				else {
+//					System.out.println(unknownCommandMsg);
+//					System.out.println("Press Enter To Continue...");
+//					new java.util.Scanner(System.in).nextLine();
+//				}
 			} catch(CommandParseException | CommandExecuteException | NumberFormatException ex){
 				System.out.format(ex.getMessage() + " %n %n"); 
 			}

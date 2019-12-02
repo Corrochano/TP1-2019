@@ -37,18 +37,10 @@ public class MoveCommand extends Command{
 			}
 			else {
 				throw new CommandExecuteException("You can't move 0 cells.");
-//				System.out.println("Direction failed");
-//				System.out.println("Press Enter To Continue...");
-//				new java.util.Scanner(System.in).nextLine();
-//				return false;
 			}
 		}
 		else {
 			throw new CommandExecuteException("Argument error");
-//			System.out.println("Unknow Command.");
-//			System.out.println("Press Enter To Continue...");
-//			new java.util.Scanner(System.in).nextLine();
-//			return false;
 		}
 	}
 

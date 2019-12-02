@@ -139,8 +139,8 @@ public class Game implements IPlayerController{
 				"^__^: Harm: 1 - Shield: 3");
 	}
 	
-	public boolean buySuperMissile() {
-		return this.player.addSuperMissile();
+	public void buySuperMissile() throws CommandExecuteException {
+		this.player.addSuperMissile();
 	}
 
 	@Override
@@ -227,7 +227,5 @@ public class Game implements IPlayerController{
 		ret += board.stringify();
 		return ret;
 	}
-	
-	
 	
 }

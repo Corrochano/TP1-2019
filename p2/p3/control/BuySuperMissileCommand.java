@@ -21,12 +21,8 @@ public class BuySuperMissileCommand extends Command {
 	@Override
 	public boolean execute(Game game, GamePrinter printer) throws CommandExecuteException {
 		printer = PrinterGenerator.useBoardPrinter();
-		if(game.buySuperMissile()) {
+		game.buySuperMissile();
 			return true;
-		}
-		else {
-			throw new CommandExecuteException("You don't have enough points.");
-		}
 	}
 
 	@Override

@@ -48,11 +48,12 @@ public class BoardPrinter extends GamePrinter {
 	}
 	
 	public String toString(Game game) {
+		String ret = game.infoToString();
 		this.setGame(game);
 		this.numRows = Game.DIM_X;
 		this.numCols = Game.DIM_Y;		
 		encodeGame(game);
-		return this.toString();
+		return ret + this.toString();
 	}
 	
 }
