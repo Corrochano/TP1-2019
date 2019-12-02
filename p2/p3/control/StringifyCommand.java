@@ -8,7 +8,7 @@ public class StringifyCommand extends Command {
 	protected final static String name = "stringify";
 	protected final static String shortcut = "z";
 	private final static String details = "stringify[z]";
-	private final static String help = "This command shows the actual state of the current game.";
+	private final static String help = "Transform the game into a string.";
 	
 	public StringifyCommand() {
 		super(StringifyCommand.name, StringifyCommand.shortcut, StringifyCommand.details, StringifyCommand.help);

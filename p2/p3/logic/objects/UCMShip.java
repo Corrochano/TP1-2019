@@ -1,5 +1,6 @@
 package tp.p2.p3.logic.objects;
 
+import tp.p2.p3.exceptions.CommandExecuteException;
 import tp.p2.p3.logic.Game;
 
 public class UCMShip extends Ship {
@@ -137,9 +138,9 @@ public class UCMShip extends Ship {
 			return true;
 		}
 		else {
-			System.out.println("You can't move so far away.");
-			System.out.println("Press Enter To Continue...");
-			new java.util.Scanner(System.in).nextLine();
+//			System.out.println("You can't move so far away.");
+//			System.out.println("Press Enter To Continue...");
+//			new java.util.Scanner(System.in).nextLine();
 			return false;
 		}
 	}
@@ -154,21 +155,22 @@ public class UCMShip extends Ship {
 		this.superMissile = superMissile;
 	}
 	
-	public void addSuperMissile() {
+	public boolean addSuperMissile() {
 		if(this.game.getPoints() >= SUPER_MISSILE_PRICE) {
 			this.superMissile += 1;
 			this.game.setPoints(this.game.getPoints() - SUPER_MISSILE_PRICE);
+			return true;
 		}
 		else {
-			System.out.println("You don't have enough points.");
-			System.out.println("Press Enter To Continue...");
-			new java.util.Scanner(System.in).nextLine();
+//			System.out.println("You don't have enough points.");
+//			System.out.println("Press Enter To Continue...");
+//			new java.util.Scanner(System.in).nextLine();
+			return false;
 		}
 	}
 
 
-	@SuppressWarnings("resource")
-	public boolean shootSuperLaser(UCMShipLaser laser) {
+	public boolean shootSuperLaser(UCMShipLaser laser) throws CommandExecuteException {
 		if(this.superMissile > 0) {
 			if(this.getCanShootLaser()) {
 				laser.enableSuperLaser();
@@ -179,17 +181,19 @@ public class UCMShip extends Ship {
 				return true;
 			}
 			else {
-				System.out.println("You have already shooted");
-				System.out.println("Press Enter To Continue...");
-		        new java.util.Scanner(System.in).nextLine();
-				return false;
+				throw new CommandExecuteException("You have already shooted.");
+//				System.out.println("You have already shooted");
+//				System.out.println("Press Enter To Continue...");
+//		        new java.util.Scanner(System.in).nextLine();
+//				return false;
 			}
 		}
 		else {
-			System.out.println("You don't have SuperMissiles.");
-			System.out.println("Press Enter To Continue...");
-	        new java.util.Scanner(System.in).nextLine();
-			return false;
+			throw new CommandExecuteException("You don't have SuperMissiles.");
+//			System.out.println("You don't have SuperMissiles.");
+//			System.out.println("Press Enter To Continue...");
+//	        new java.util.Scanner(System.in).nextLine();
+//			return false;
 		}
 		
 	}

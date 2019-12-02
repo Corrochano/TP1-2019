@@ -1,5 +1,6 @@
 package tp.p2.p3.control;
 
+import tp.p2.p3.exceptions.CommandExecuteException;
 import tp.p2.p3.logic.Game;
 import tp.p2.p3.view.GamePrinter;
 import tp.p2.p3.view.PrinterGenerator;
@@ -14,19 +15,19 @@ public class ShockwaveCommand extends Command {
 		super(ShockwaveCommand.name, ShockwaveCommand.shortcut, ShockwaveCommand.details, ShockwaveCommand.help);
 	}
 
-	@SuppressWarnings("resource")
 	@Override
-	public boolean execute(Game game, GamePrinter printer) {
+	public boolean execute(Game game, GamePrinter printer) throws CommandExecuteException {
 		printer = PrinterGenerator.useBoardPrinter();
 		if(game.shockWave()) {
 			game.update();
 			return true;
 		}
 		else {
-			System.out.println("Shock Wave is disable");
-			System.out.println("Press Enter To Continue...");
-	        new java.util.Scanner(System.in).nextLine();
-	        return false;
+			throw new CommandExecuteException("ShockWave is disable");
+//			System.out.println("Shock Wave is disable");
+//			System.out.println("Press Enter To Continue...");
+//	        new java.util.Scanner(System.in).nextLine();
+//	        return false;
 		}
 	}
 

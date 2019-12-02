@@ -1,5 +1,6 @@
 package tp.p2.p3.control;
 
+import tp.p2.p3.exceptions.CommandExecuteException;
 import tp.p2.p3.logic.Game;
 import tp.p2.p3.view.GamePrinter;
 import tp.p2.p3.view.PrinterGenerator;
@@ -18,10 +19,14 @@ public class BuySuperMissileCommand extends Command {
 	}
 
 	@Override
-	public boolean execute(Game game, GamePrinter printer) {
+	public boolean execute(Game game, GamePrinter printer) throws CommandExecuteException {
 		printer = PrinterGenerator.useBoardPrinter();
-		game.buySuperMissile();
-		return true;
+		if(game.buySuperMissile()) {
+			return true;
+		}
+		else {
+			throw new CommandExecuteException("You don't have enough points.");
+		}
 	}
 
 	@Override

@@ -1,5 +1,7 @@
 package tp.p2.p3.control;
 
+import tp.p2.p3.exceptions.CommandParseException;
+
 public class CommandGenerator {
 
 	private static Command[] availableCommands = {
@@ -16,7 +18,7 @@ public class CommandGenerator {
 		new ListPrintersCommand()
 	};
 	
-	public static Command parseCommand(String[ ] commandWords) {
+	public static Command parseCommand(String[ ] commandWords) throws CommandParseException{
 		Command command = null;
 		int i = 0;
 		
@@ -24,7 +26,13 @@ public class CommandGenerator {
 			command = availableCommands[i].parse(commandWords);
 			i++;
 		}while(i < availableCommands.length && command == null);
-		return command;
+		
+		if(command != null) {
+			return command;
+		}
+		else {
+			throw new CommandParseException("Command doesn't exists");
+		}
 	}
 	
 	public static String commandHelp() {
@@ -37,4 +45,6 @@ public class CommandGenerator {
 		return help;	
 	}
 		
+	
+	
 }

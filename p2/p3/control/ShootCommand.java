@@ -1,5 +1,6 @@
 package tp.p2.p3.control;
 
+import tp.p2.p3.exceptions.CommandExecuteException;
 import tp.p2.p3.logic.Game;
 import tp.p2.p3.view.GamePrinter;
 import tp.p2.p3.view.PrinterGenerator;
@@ -15,9 +16,8 @@ public class ShootCommand extends Command {
 		super(ShootCommand.name, ShootCommand.shortcut, ShootCommand.details, ShootCommand.help);
 	}
 
-	@SuppressWarnings("resource")
 	@Override
-	public boolean execute(Game game, GamePrinter printer) {
+	public boolean execute(Game game, GamePrinter printer) throws CommandExecuteException {
 		printer = PrinterGenerator.useBoardPrinter();
 		if(this.myCommandWords.length == 1) {
 			if(game.shootLaser()) {
@@ -25,10 +25,11 @@ public class ShootCommand extends Command {
 				return true;
 			}
 			else {
-				System.out.println("You have already shooted");
-				System.out.println("Press Enter To Continue...");
-		        new java.util.Scanner(System.in).nextLine();
-				return false;
+				throw new CommandExecuteException("You have already shooted");
+//				System.out.println("You have already shooted");
+//				System.out.println("Press Enter To Continue...");
+//		        new java.util.Scanner(System.in).nextLine();
+//				return false;
 			}
 		}
 		else if (this.myCommandWords[1].equals("supermissile") || this.myCommandWords[1].equals("s")){
@@ -37,14 +38,16 @@ public class ShootCommand extends Command {
 				return true;
 			}
 			else {
-				return false;
+				throw new CommandExecuteException("You have already shooted or you don't have super missile."); // Aquí no se va a meter nunca
+//				return false;
 			}
 		}
 		else {
-			System.out.println("Unknow command.");
-			System.out.println("Press Enter To Continue...");
-			new java.util.Scanner(System.in).nextLine();
-			return false;
+			throw new CommandExecuteException("Argument error.");
+//			System.out.println("Unknow command.");
+//			System.out.println("Press Enter To Continue...");
+//			new java.util.Scanner(System.in).nextLine();
+//			return false;
 		}
 	}
 

@@ -2,6 +2,7 @@ package tp.p2.p3.logic;
 
 import java.util.Random;
 
+import tp.p2.p3.exceptions.CommandExecuteException;
 import tp.p2.p3.logic.Level;
 import tp.p2.p3.logic.lists.GameObjectBoard;
 import tp.p2.p3.logic.objects.AlienShip;
@@ -10,7 +11,6 @@ import tp.p2.p3.logic.objects.IPlayerController;
 import tp.p2.p3.logic.objects.Shockwave;
 import tp.p2.p3.logic.objects.UCMShip;
 import tp.p2.p3.logic.objects.UCMShipLaser;
-import tp.p2.p3.view.BoardPrinter;
 
 public class Game implements IPlayerController{
 	public final static int DIM_X = 8;
@@ -139,8 +139,8 @@ public class Game implements IPlayerController{
 				"^__^: Harm: 1 - Shield: 3");
 	}
 	
-	public void buySuperMissile() {
-		this.player.addSuperMissile();
+	public boolean buySuperMissile() {
+		return this.player.addSuperMissile();
 	}
 
 	@Override
@@ -212,13 +212,13 @@ public class Game implements IPlayerController{
 		
 	}
 
-	public boolean shootSuperLaser() {
+	public boolean shootSuperLaser() throws CommandExecuteException {
 		return this.player.shootSuperLaser(this.laser);
 	}
 
 	public String stringify() {
 		String ret;
-		ret = "— Space Invaders v2.0"
+		ret = "— Space Invaders v2.0 —"
 				+ "\n"
 				+ "G: "
 				+ Integer.valueOf(this.currentCycle)

@@ -2,6 +2,8 @@ package tp.p2.p3.control;
 
 import java.util.Scanner;
 
+import tp.p2.p3.exceptions.CommandExecuteException;
+import tp.p2.p3.exceptions.CommandParseException;
 import tp.p2.p3.logic.Game;
 import tp.p2.p3.view.GamePrinter;
 import tp.p2.p3.view.PrinterGenerator;
@@ -25,17 +27,20 @@ public class Controller {
 		while(!this.game.isFinished()) {
 			System.out.print(PROMPT);
 			String[] comando = scan.nextLine().toLowerCase().trim().split ("\\s+");	
-			Command command = CommandGenerator.parseCommand(comando);
-			if(command != null) {
-				if (command.execute(game, printer)) {
-				//	System.out.println(game/*.toString()*/);
-					System.out.println(printer.toString(game)); // Normalmente será BoardPrinter
+			try {
+				Command command = CommandGenerator.parseCommand(comando);
+				if(command != null) {
+					if (command.execute(game, printer)) {
+						System.out.println(printer.toString(game)); // Normalmente será BoardPrinter
+					}
 				}
-			}
-			else {
-				System.out.println(unknownCommandMsg);
-				System.out.println("Press Enter To Continue...");
-				new java.util.Scanner(System.in).nextLine();
+				else {
+					System.out.println(unknownCommandMsg);
+					System.out.println("Press Enter To Continue...");
+					new java.util.Scanner(System.in).nextLine();
+				}
+			} catch(CommandParseException | CommandExecuteException | NumberFormatException ex){
+				System.out.format(ex.getMessage() + " %n %n"); 
 			}
 		}
 		System.out.println(game.getWinnerMessage());
