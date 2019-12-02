@@ -39,7 +39,7 @@ public class Controller {
 //					System.out.println("Press Enter To Continue...");
 //					new java.util.Scanner(System.in).nextLine();
 //				}
-			} catch(CommandParseException | CommandExecuteException | NumberFormatException ex){
+			} catch(CommandParseException | CommandExecuteException ex){
 				System.out.format(ex.getMessage() + " %n %n"); 
 			}
 		}
